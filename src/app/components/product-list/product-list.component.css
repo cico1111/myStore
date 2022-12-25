@@ -1,0 +1,16 @@
+.product-index {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 200px;
+  margin-bottom: 64px;
+}
+
+img {
+width: 100%;
+}
+.product-container {
+  display: flex;
+  justify-content: center;
+  
+}

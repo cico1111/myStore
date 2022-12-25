@@ -1,0 +1,11 @@
+<h1>product-list</h1>
+<div class="product-container" >
+  <div class="product-index" *ngFor="let item of items">
+    <a href="">
+      {{item.id}}
+      {{item.name}}
+      {{item.price}}
+      <img src="{{item.url}}" alt="">
+      {{item.description}}</a>
+  </div>
+</div>
