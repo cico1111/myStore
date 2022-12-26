@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService } from 'src/app/http.service';
+import { DataService } from 'src/app/data.service';
+
 import { Item } from 'src/app/models/Item';
 
 
@@ -12,11 +13,15 @@ export class ProductListComponent implements OnInit {
 
   items: Item[] = [];
 
-  constructor(private httpService: HttpService) { }
+  constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
-    this.httpService.getItems().subscribe(data => {
+    this.dataService.getItems().subscribe(data => {
       this.items = data;
     });
+   
+  }
+  onSubmit(item: Item, e: any){
+
   }
 }

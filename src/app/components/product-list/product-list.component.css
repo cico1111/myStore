@@ -1,16 +1,19 @@
+
 .product-index {
+  margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  max-width: 200px;
+  max-width: 1024px;
   margin-bottom: 64px;
+  justify-content: left;
 }
 
 img {
 width: 100%;
 }
-.product-container {
-  display: flex;
+.product-container {  
   justify-content: center;
-  
+  max-width: 20%;
+  margin: 20px;
 }
