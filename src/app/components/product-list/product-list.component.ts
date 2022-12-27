@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DataService } from 'src/app/data.service';
 
 import { Item } from 'src/app/models/Item';
@@ -10,7 +10,7 @@ import { Item } from 'src/app/models/Item';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-
+ 
   items: Item[] = [];
 
   constructor(private dataService: DataService) { }
@@ -21,7 +21,7 @@ export class ProductListComponent implements OnInit {
     });
    
   }
-  onSubmit(item: Item, e: any){
-
+  onSubmit(){    
+    alert(` has successfully signed in!`);
   }
 }

@@ -1,23 +1,5 @@
 <h1>Product List</h1>
 <div class="product-index" >  
-  <div class="product-container" *ngFor="let item of items" >  
-
-    {{item.id}}
-    {{item.name}}
-    ${{item.price}}
-    <a routerLink="product-item-detail/{{ item.id }}"><img src="{{item.url}}" alt=""></a><br>
-   
-
-    <form (ngSubmit)="onSubmit(item, $event)">
-      <select >
-          <option selected value="1">1</option>
-          <option *ngFor="let value of [2, 3, 4, 5, 6, 7, 8, 9, 10]" value="{{value}}">{{value}}</option>            
-      </select>
-      <input type="submit" value="Add to Cart" >
-  </form>
-  </div>
+  <app-product-item   *ngFor="let item of items"  [item]="item" ></app-product-item>
 </div>
 
-<!-- <div class="product-index" >  
-  <app-product-item-detail class="product-container" *ngFor="let item of items" [item]="item"></app-product-item-detail>
-</div> -->

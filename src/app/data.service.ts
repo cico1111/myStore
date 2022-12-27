@@ -7,6 +7,10 @@ import { Item } from './models/Item';
   providedIn: 'root'
 })
 export class DataService {
+ 
+
+  cart: Map<Item, number>= new Map<Item, number>()
+ 
 
   constructor(private http: HttpClient) { }
 
@@ -19,5 +23,13 @@ export class DataService {
         return items.find((p: Item) => p.id === id);
       })
     )
+  }
+  addToCart(p: Item, quantity: number) :void{
+    this.cart.set(p, quantity)
+    console.log(this.cart)
+  }
+
+  showCart() {
+    return this.cart
   }
 }

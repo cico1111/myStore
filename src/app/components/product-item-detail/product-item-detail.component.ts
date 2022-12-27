@@ -10,7 +10,7 @@ import { Item } from 'src/app/models/Item';
 })
 export class ProductItemDetailComponent implements OnInit{
  id!: number;
- quantity: number = 1;
+ quantity!: number;
  items: Item[] = [];
  item: Item | undefined;
 
@@ -19,7 +19,7 @@ export class ProductItemDetailComponent implements OnInit{
 
 
   ngOnInit(): void {   
-   
+  
     this.route.params.subscribe(params => {
       this.id =parseInt(params['id'])         
     })
@@ -30,8 +30,13 @@ export class ProductItemDetailComponent implements OnInit{
    
 
   }
-  onSubmit(item: Item, e: any){
-
+  onSubmit(){
+  
+    if(this.item){
+        alert(`${this.item.name} is in cart!${this.quantity} `)
+        this.dataService.addToCart(this.item, this.quantity)
+    }
+  
   }
 
 }
