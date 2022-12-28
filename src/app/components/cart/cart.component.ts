@@ -36,7 +36,6 @@ export class CartComponent implements OnInit {
   onSubmit(){
     this.router.navigateByUrl('/confirmation');
     this.dataService.setInfo(this.fullname)
-    console.log(this.fullname,this.address,this.credit)
   }
 
   }

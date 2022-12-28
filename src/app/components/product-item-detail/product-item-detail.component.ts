@@ -15,7 +15,9 @@ export class ProductItemDetailComponent implements OnInit{
  item: Item | undefined;
 
 
-  constructor(private route: ActivatedRoute, private dataService: DataService){ }
+  constructor(private route: ActivatedRoute, private dataService: DataService){ 
+    this.quantity = 1;
+   }
 
 
   ngOnInit(): void {   

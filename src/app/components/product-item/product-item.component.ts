@@ -11,7 +11,10 @@ export class ProductItemComponent {
   @Input()
   item!: Item; 
   quantity!: number;
-  constructor(private dataService: DataService){ }
+  
+  constructor(private dataService: DataService){ 
+    this.quantity = 1;
+  }
   onSubmit(){
   
     if(this.item){

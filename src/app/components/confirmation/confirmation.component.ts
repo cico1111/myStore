@@ -18,8 +18,7 @@ export class ConfirmationComponent {
     
   }
   clearCart(){
-    this.dataService.clearCart()
-    console.log("clearcart:",this.dataService.showCart().size)
+    this.dataService.clearCart() 
     this.router.navigateByUrl('')
   }
 }

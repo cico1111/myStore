@@ -1,4 +1,4 @@
-<p>cart works!</p>
+
 <div class="cart-container">
     <ul>
         <li class="cart-item" *ngFor="let item of cart | keyvalue" >  
@@ -19,25 +19,25 @@
 
     <div class="cart-panel ">
    
-        <form  class="number-input " action="/confirmation" (ngSubmit)="onSubmit()" >     
+        <form #form="ngForm"  class="number-input " action="/confirmation" (ngSubmit)="onSubmit()" >     
         
             <div >
                 <label for="fullname" >Full Name</label>
-                <input type="text" id="fullname" name="fullname" [(ngModel)]="fullname" placeholder="(minimum 3 characters)" >
+                <input type="text" id="fullname" name="fullname" required  minlength="3" [(ngModel)]="fullname" placeholder="(minimum 3 characters)" >
             </div>
             
             <div>
                 <label for="address">Address</label>
-                <input type="text" id="address" name="address" [(ngModel)]="address" placeholder="(minimum 6 characters)" >
+                <input type="text" id="address" name="address" required  minlength="6" [(ngModel)]="address" placeholder="(minimum 6 characters)" >
             </div>
             
             <div >
                 <label for="credit">Credit card number</label>
-                <input type="text" id="credit" name = "credit"  [(ngModel)]="credit" placeholder="(16-digit numbers)">
+                <input type="text" id="credit" name = "credit"  required  minlength="16" maxlength="16" [(ngModel)]="credit" placeholder="(16-digit numbers)">
             </div>
             
             <div>
-                <button class="btn btn-primary"  type="submit">Sign in</button>
+                <button class="btn btn-primary" [disabled]="form.invalid" type="submit">Sign in</button>
             </div>
             
         </form>

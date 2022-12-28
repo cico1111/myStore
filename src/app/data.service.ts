@@ -26,8 +26,7 @@ export class DataService {
     )
   }
   addToCart(p: Item, quantity: number) :void{
-    this.cart.set(p, quantity)
-    console.log(this.cart)
+    this.cart.set(p, quantity)   
   }
 
   showCart() {
@@ -47,12 +46,12 @@ export class DataService {
   setInfo(name: string){
     this.fullname = name
   }
-getInfo(){
-  return this.fullname
-}
+  getInfo(){
+    return this.fullname
+  }
 
-clearCart(){
-  this.cart.clear()
-}
+  clearCart(){
+    this.cart.clear()
+  }
 
 }

@@ -18,10 +18,7 @@ export class ProductListComponent implements OnInit {
   ngOnInit(): void {
     this.dataService.getItems().subscribe(data => {
       this.items = data;
-    });
-   
+    });   
   }
-  onSubmit(){    
-    alert(` has successfully signed in!`);
-  }
+ 
 }
