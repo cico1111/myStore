@@ -1,6 +1,45 @@
-<!-- <p>cart works!</p>
-<ul>
-    <li *ngFor="let p of cart | keyvalue">
-        {{p.key.name}}~{{p.value}}
-    </li>
-</ul> -->
+<p>cart works!</p>
+<div class="cart-container">
+    <ul>
+        <li class="cart-item" *ngFor="let item of cart | keyvalue" >  
+            <div class="container-item">
+                <img class="product-image" src="{{item.key.url}} " alt="">
+            </div>
+            <div class="cart-item-details">
+                {{item.key.name}}<br>
+                {{item.key.price}}<br>             
+                <label for="quantity">Amount:</label>
+                <input type="number"  name="quantity"  min="1"  [(ngModel)]="item.value" (ngModelChange)="cal(item.key,item.value)">
+            </div>     
+           
+        </li>
+        <div> Total: ${{total}}</div><br>
+       
+    </ul>
+
+    <div class="cart-panel ">
+   
+        <form  class="number-input " action="/confirmation" (ngSubmit)="onSubmit()" >     
+        
+            <div >
+                <label for="fullname" >Full Name</label>
+                <input type="text" id="fullname" name="fullname" [(ngModel)]="fullname" placeholder="(minimum 3 characters)" >
+            </div>
+            
+            <div>
+                <label for="address">Address</label>
+                <input type="text" id="address" name="address" [(ngModel)]="address" placeholder="(minimum 6 characters)" >
+            </div>
+            
+            <div >
+                <label for="credit">Credit card number</label>
+                <input type="text" id="credit" name = "credit"  [(ngModel)]="credit" placeholder="(16-digit numbers)">
+            </div>
+            
+            <div>
+                <button class="btn btn-primary"  type="submit">Sign in</button>
+            </div>
+            
+        </form>
+    </div>
+</div>

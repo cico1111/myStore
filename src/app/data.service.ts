@@ -10,6 +10,7 @@ export class DataService {
  
 
   cart: Map<Item, number>= new Map<Item, number>()
+  fullname!: string;
  
 
   constructor(private http: HttpClient) { }
@@ -32,4 +33,26 @@ export class DataService {
   showCart() {
     return this.cart
   }
+
+  setCart(cart:Map<Item, number>){
+    this.cart= cart
+  }
+  totalPrice(){
+    let total : number=0
+    for(let [key, value] of this.cart){    
+     total += key.price*value
+    }      
+    return total
+  }
+  setInfo(name: string){
+    this.fullname = name
+  }
+getInfo(){
+  return this.fullname
+}
+
+clearCart(){
+  this.cart.clear()
+}
+
 }
