@@ -36,7 +36,7 @@ export class ProductItemDetailComponent implements OnInit{
   
     if(this.item){
         alert(`${this.item.name} is in cart!${this.quantity} `)
-        this.dataService.addToCart(this.item, this.quantity)
+        this.dataService.addToCart(this.item.id, this.quantity)
     }
   
   }

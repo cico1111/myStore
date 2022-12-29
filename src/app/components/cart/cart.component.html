@@ -1,7 +1,20 @@
+<!-- {{test.name}} -->
 
 <div class="cart-container">
-    <ul>
-        <li class="cart-item" *ngFor="let item of cart | keyvalue" >  
+    <ul *ngIf="cart">
+        <li class="cart-item" *ngFor="let item of cart " >  
+            <div class="container-item">
+                <img class="product-image" src="{{item.url}} " alt="">
+            </div>
+            <div class="cart-item-details">
+                {{item.name}}<br>
+                {{item.price}}<br>             
+                <label for="quantity">Amount:</label>
+                <input type="number"  name="quantity"  min="0"  [(ngModel)]="item.quantity"  (ngModelChange)="cal(item,cart)">
+            </div>     
+           
+        </li>
+        <!-- <li class="cart-item" *ngFor="let item of cart | keyvalue" >  
             <div class="container-item">
                 <img class="product-image" src="{{item.key.url}} " alt="">
             </div>
@@ -9,10 +22,10 @@
                 {{item.key.name}}<br>
                 {{item.key.price}}<br>             
                 <label for="quantity">Amount:</label>
-                <input type="number"  name="quantity"  min="1"  [(ngModel)]="item.value" (ngModelChange)="cal(item.key,item.value)">
+                <input type="number"  name="quantity"  min="0"  [(ngModel)]="item.value" (ngModelChange)="cal(item.key,item.value)">
             </div>     
            
-        </li>
+        </li> -->
         <div> Total: ${{total}}</div><br>
        
     </ul>

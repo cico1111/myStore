@@ -1,5 +1,4 @@
-import { Component, Input } from '@angular/core';
-import { DataService } from 'src/app/data.service';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Item } from 'src/app/models/Item';
 
 @Component({
@@ -8,19 +7,15 @@ import { Item } from 'src/app/models/Item';
   styleUrls: ['./product-item.component.css']
 })
 export class ProductItemComponent {
-  @Input()
-  item!: Item; 
+  @Input() item!: Item; 
   quantity!: number;
-  
-  constructor(private dataService: DataService){ 
+  addedItem!: object;
+  @Output() added = new EventEmitter();
+  constructor(){ 
     this.quantity = 1;
   }
   onSubmit(){
-  
-    if(this.item){
-        alert(`${this.item.name} is in cart!${this.quantity} `)
-        this.dataService.addToCart(this.item, this.quantity)
-    }
-  
+    this.addedItem={item: this.item, quantity:this.quantity}
+    this.added.emit(this.addedItem)
   }
 }
