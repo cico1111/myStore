@@ -9,10 +9,7 @@ import { Item } from './models/Item';
 })
 export class DataService {
  
-
-  cartId: Map<number, number>= new Map<number, number>()
- 
- 
+  cartId: Map<number, number>= new Map<number, number>() 
   info ={name:'', totalPrice:0}
   item: Item | undefined;
 
@@ -33,8 +30,7 @@ export class DataService {
   addToCart(id: number, quantity: number) :void{
     
     if(this.cartId.has(id)){      
-      const a = this.cartId.get(id)
-      console.log("^^^^",this.cartId.get(id))
+      const a = this.cartId.get(id)      
       if(a!==undefined){
         this.cartId.set(id, Number(a)+Number(quantity))       
       }        

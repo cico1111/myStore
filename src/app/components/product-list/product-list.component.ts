@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DataService } from 'src/app/data.service';
-
 import { Item } from 'src/app/models/Item';
 
 
@@ -22,7 +21,6 @@ export class ProductListComponent implements OnInit {
   }
 
   addtoCart(addedItem:{item: Item, quantity:number}){
-    console.log(addedItem)
     alert(`${addedItem.item.name} is in cart!${addedItem.quantity} `)
     this.dataService.addToCart(addedItem.item.id, addedItem.quantity)    
   }

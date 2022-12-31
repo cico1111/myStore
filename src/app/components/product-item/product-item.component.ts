@@ -7,13 +7,16 @@ import { Item } from 'src/app/models/Item';
   styleUrls: ['./product-item.component.css']
 })
 export class ProductItemComponent {
+
   @Input() item!: Item; 
   quantity!: number;
   addedItem!: object;
   @Output() added = new EventEmitter();
+
   constructor(){ 
     this.quantity = 1;
   }
+  
   onSubmit(){
     this.addedItem={item: this.item, quantity:this.quantity}
     this.added.emit(this.addedItem)
