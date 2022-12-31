@@ -6,7 +6,9 @@ img {
 .form-margin {
   margin-bottom: 12px;
 }
-
+.valid{
+  color: red;
+}
 .cart-item {
   display: flex;
   flex-direction: row;

@@ -29,7 +29,7 @@ export class ProductItemDetailComponent implements OnInit{
     this.dataService.getItemById(this.id).subscribe((item) => {
       this.item = item;
     });
-   
+  
 
   }
   onSubmit(){

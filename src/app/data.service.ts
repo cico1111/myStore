@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { forkJoin, map, Observable } from 'rxjs';
 import { Cart } from './models/Cart';
 import { Item } from './models/Item';
 
@@ -10,9 +10,10 @@ import { Item } from './models/Item';
 export class DataService {
  
 
-  cart: Map<number, number>= new Map<number, number>()
-  //cartItem: Map<Item, number>= new Map<Item, number>()
-  fullname!: string;
+  cartId: Map<number, number>= new Map<number, number>()
+ 
+ 
+  info ={name:'', totalPrice:0}
   item: Item | undefined;
 
 
@@ -28,116 +29,61 @@ export class DataService {
       })
     )
   }
+
   addToCart(id: number, quantity: number) :void{
     
-    if(this.cart.has(id)){      
-      const a = this.cart.get(id)
-      console.log("^^^^",this.cart.get(id))
+    if(this.cartId.has(id)){      
+      const a = this.cartId.get(id)
+      console.log("^^^^",this.cartId.get(id))
       if(a!==undefined){
-      this.cart.set(id, Number(a)+Number(quantity)) 
-      }
-        
+        this.cartId.set(id, Number(a)+Number(quantity))       
+      }        
     }else{
-    
-      this.cart.set(id, quantity)   
+      this.cartId.set(id, quantity)  
+    }      
+  }
+  getCartItems(): Observable<Cart[]> {
+    return new Observable<Cart[]>((subscriber) => {
+      let items = Array.from(this.cartId.keys()).map((id) => {
+        return this.getItemById(id);
+      });
 
-    }
-    console.log(this.cart)  
-      
-}
+      if (items.length == 0) {
+        subscriber.next(new Array<Cart>());
+      }
 
-  // getCartItems():Observable<Map<Item, number>>{
-  //   let cartItem = new Map<Item, number>()
-  //   for(let [key, value] of this.cart){
-  //     this.getItemById(key).subscribe((x) => {
-  //       if(x)
-  //         cartItem.set(x,value)
-  //       })
-  //   }  
-  //   return new Observable((subscriber) => {    
-  //     subscriber.next(cartItem);  
-  //   });
-  // }
-  getCartItem():Observable<Cart[]>{
-    let cartItem :Cart[]= new Array()
-    for(let [key, value] of this.cart){
-      this.getItemById(key).subscribe((x) => {
-        if(x)
-          cartItem.push({id:x.id,name:x.name,price:x.price,url:x.url,description:x.description,quantity:value})
-        })
-    }  
-    return new Observable((subscriber) => {    
-      subscriber.next(cartItem);  
+      forkJoin(items).subscribe((product) => {
+        const cart = new Array<Cart>();
+        product.forEach((product) => {
+          if (product !== undefined) {
+            let item = product as Item;
+            let quantity = this.cartId.get(item.id) || 0
+            cart.push({
+              item: item,
+              quantity: quantity,
+            });
+          }
+        });
+        subscriber.next(cart);
+      });
     });
   }
-  getPrice(): Observable<Map<number, number>>{
-    let price = new Map<number, number>()
- 
-    for(let [key, value] of this.cart){
-      this.getItemById(key).subscribe((x) => {
-        if(x)
-          price.set(key,x.price*value)
-        })
-    }  
-   
-    return new Observable((subscriber) => {    
-      subscriber.next(price);  
-    });
-    
-  }
-  
-// getCartItems(): Observable<Map<Item, number>> {
-//   return  new Observable((subscriber) => {
-//     console.log('Hello');
-//     subscriber.next(42);
-//   });
-//   let cartItem = new Map<Item, number>()
-//   for(let [key, value] of this.cart){
-       
-      
-//         cartItem.set(getItemById(key),value)
-        
-//        }
-//   return cartItem
-// }
-
-  // showCart() {  
-  //   for(let [key, value] of this.cart){
-  //    if(this.item){
-  //     this.getItemById(key).subscribe((item) => {
-  //       this.item = item;
-  //     });
-  //     this.cartItem.set(this.item,value)
-  //     }
-  //    }
-  //  console.log(this.cartItem)
-  //   return this.cartItem
-  // }
-
   setCartItem(id: number, quantity:number){   
-    this.cart.set(id, quantity)
+    this.cartId.set(id, quantity)     
   }
   removeCartItem(id: number){   
-    this.cart.delete(id)
+    this.cartId.delete(id)     
   }
-  // totalPrice(){
-  //   let total : number=0
-  //   for(let [key, value] of this.cart){   
-  //     this.getItemById(key).pipe().subscribe((p)=>this.item=p) 
-  //     if(this.item)
-  //     total += this.item.price*value
-  //   }      
-  //   return total
-  // }
-  setInfo(name: string){
-    this.fullname = name
+  setInfo(name: string, total:number){
+    this.info={ name: name,
+    totalPrice:total}
   }
   getInfo(){
-    return this.fullname
+    return this.info
   }
 
   clearCart(){
-    this.cart.clear()
-  }
-
+    this.cartId.clear()   
+  }  
 }
+  

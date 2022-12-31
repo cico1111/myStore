@@ -12,10 +12,9 @@ export class ConfirmationComponent {
   fullname!: string; 
   totalPrice!: number;
   constructor(private dataService: DataService, private router: Router){ }
-  ngOnInit(): void {
-    //this.totalPrice=this.dataService.totalPrice()
-    this.fullname = this.dataService.getInfo()
-    
+  ngOnInit(): void {    
+    this.fullname = this.dataService.getInfo().name
+    this.totalPrice =  this.dataService.getInfo().totalPrice
   }
   clearCart(){
     this.dataService.clearCart() 
